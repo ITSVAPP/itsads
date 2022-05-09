@@ -6,5 +6,5 @@ createdday DATE NOT NULL DEFAULT (CURRENT_DATE),
 deadline DATE,
 completionday DATE,
 createuser VARCHAR(100),
-status integer NOT NULL DEFAULT 0
+status INTEGER NOT NULL DEFAULT 0
 );
