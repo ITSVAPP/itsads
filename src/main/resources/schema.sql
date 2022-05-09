@@ -2,9 +2,9 @@ create table issues (
 id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 summary VARCHAR(256) NOT NULL,
 description VARCHAR(256) NOT NULL,
-createdday date NOT NULL default (CURRENT_DATE),
-deadline date,
-completionday date,
+createdday DATE NOT NULL DEFAULT (CURRENT_DATE),
+deadline DATE,
+completionday DATE,
 createuser VARCHAR(100),
-status integer NOT NULL default 0
+status integer NOT NULL DEFAULT 0
 );
