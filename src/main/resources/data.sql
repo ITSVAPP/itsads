@@ -1,3 +1,3 @@
-insert into issues (summary, description) values ('バグA', 'バグがあります');
-insert into issues (summary, description) values ('機能要望B', 'Bに追加機能がほしいです');
-insert into issues (summary, description) values ('画面Cが遅い', '早くしてほしいです');
+insert into issues (summary, description, createdday, deadline, completionday, createuser, status) values ('バグA', 'バグがあります','2022-6-6','2022-6-6','2022-6-6','ユーザA',1);
+insert into issues (summary, description, createdday, deadline, completionday, createuser, status) values ('機能要望B', 'Bに追加機能がほしいです','2022-6-6','2022-6-6','2022-6-6','ユーザA',2);
+insert into issues (summary, description, createdday, deadline, completionday, createuser, status) values ('画面Cが遅い', '早くしてほしいです','2022-6-6','2022-6-6','2022-6-6','ユーザA',3);
