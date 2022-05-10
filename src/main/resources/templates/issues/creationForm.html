@@ -37,9 +37,9 @@
         <label for="statusInput" class="form-label">ステータス</label>
         <select id="statusInput" th:field="*{status}" class="form-control"
                   th:errorclass="is-invalid">
-                  <option value="1">未着手</option>
-                  <option value="2">着手</option>
-                  <option value="3">完了</option>
+                  <option value="0">未着手</option>
+                  <option value="1">着手</option>
+                  <option value="2">完了</option>
         </select>
         <p class="invalid-feedback"  th:errors="*{createuser}">(error)</p>
     </div>
