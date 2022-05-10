@@ -37,7 +37,7 @@ public class IssueController {
         if (bindingResult.hasErrors()) {
             return showCreationForm(form);
         }
-        issueService.create(form.getSummary(), form.getDescription());
+        issueService.create(form);
         return "redirect:/issues";
     }
 

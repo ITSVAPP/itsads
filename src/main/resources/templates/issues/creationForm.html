@@ -19,6 +19,31 @@
                   th:errorclass="is-invalid"></textarea>
         <p class="invalid-feedback"  th:errors="*{description}">(error)</p>
     </div>
+     <div class="mt-3">
+        <label for="deadlineInput" class="form-label">期限</label>
+        <input type="date" id="deadlineInput" th:field="*{deadline}" class="form-control"
+                  th:errorclass="is-invalid">
+        <p class="invalid-feedback"  th:errors="*{deadline}">(error)</p>
+    </div>
+    
+    <div class="mt-3">
+        <label for="createuserInput" class="form-label">作成者</label>
+        <input type="text" id="createuserInput" th:field="*{createuser}" class="form-control"
+                  th:errorclass="is-invalid">
+        <p class="invalid-feedback"  th:errors="*{createuser}">(error)</p>
+    </div>
+    
+    <div class="mt-3">
+        <label for="statusInput" class="form-label">ステータス</label>
+        <select id="statusInput" th:field="*{status}" class="form-control"
+                  th:errorclass="is-invalid">
+                  <option value="1">未着手</option>
+                  <option value="2">着手</option>
+                  <option value="3">完了</option>
+        </select>
+        <p class="invalid-feedback"  th:errors="*{createuser}">(error)</p>
+    </div>
+    
     <div class="mt-3">
         <button type="submit" class="btn btn-primary">作成</button>
         <a href="./list.html" th:href="@{/issues}" class="btn btn-secondary">キャンセル</a>

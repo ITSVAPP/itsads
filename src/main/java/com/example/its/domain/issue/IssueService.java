@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.its.web.issue.IssueForm;
+
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -18,8 +20,12 @@ public class IssueService {
 	}
 
 	@Transactional
-	public void create(String summary, String description) {
-		issueRepository.insert(summary, description);
+	public void create(IssueForm form) {
+
+		String createuser = "".equals(form.getCreateuser()) ? null : form.getCreateuser();
+
+		issueRepository.insert(form.getSummary(), form.getDescription(), form.getDeadline(), createuser,
+				form.getStatus());
 	}
 
 	public IssueEntity findById(long issueId) {
