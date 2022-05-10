@@ -38,9 +38,14 @@
 			</tbody>
 		</table>
 		<div>
+			<a href="/issues/changeForm.html"
+				th:href="@{/issues/{issueId}/change(issueId=${issueId})}"
+				class="btn btn-primary">変更</a>
+
 			<form action="#"
 				th:action="@{/issues/{issueId}/delete(issueId=${issueId})}"
-				th:method="post">
+				th:method="post"
+				class="d-inline">
 				<button type="submit" class="btn btn-danger">削除</button>
 			</form>
 		</div>

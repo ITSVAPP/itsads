@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.its.domain.issue.IssueEntity;
 import com.example.its.domain.issue.IssueService;
 
 import lombok.RequiredArgsConstructor;
@@ -53,4 +54,18 @@ public class IssueController {
 		return "redirect:/issues";
 	}
 
+	@GetMapping("/{issueId}/change")
+	public String showChangeForm(@PathVariable("issueId") long issueId, @ModelAttribute IssueChangeForm form,
+			Model model) {
+		IssueEntity issue = issueService.findById(issueId);
+		form.setSummary(issue.getSummary());
+		form.setDescription(issue.getDescription());
+		form.setDeadline(issue.getDeadline());
+		form.setCompletionday(issue.getCompletionday());
+		form.setCreateuser(issue.getCreateuser());
+		form.setStatus(issue.getStatus());
+		model.addAttribute("issue", issue);
+
+		return "issues/changeForm";
+	}
 }
