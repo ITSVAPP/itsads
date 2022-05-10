@@ -21,9 +21,6 @@ public class IssueForm {
 	private String description;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date createdday;
-
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date deadline;
 
 	@Size(max = 100)
