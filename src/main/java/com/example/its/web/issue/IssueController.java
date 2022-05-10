@@ -56,16 +56,35 @@ public class IssueController {
 
 	@GetMapping("/{issueId}/change")
 	public String showChangeForm(@PathVariable("issueId") long issueId, @ModelAttribute IssueChangeForm form,
-			Model model) {
+			BindingResult bindingResult, Model model) {
+
 		IssueEntity issue = issueService.findById(issueId);
-		form.setSummary(issue.getSummary());
-		form.setDescription(issue.getDescription());
-		form.setDeadline(issue.getDeadline());
-		form.setCompletionday(issue.getCompletionday());
-		form.setCreateuser(issue.getCreateuser());
-		form.setStatus(issue.getStatus());
+
+		if (!bindingResult.hasErrors()) {
+			form.setSummary(issue.getSummary());
+			form.setDescription(issue.getDescription());
+			form.setDeadline(issue.getDeadline());
+			form.setCompletionday(issue.getCompletionday());
+			form.setCreateuser(issue.getCreateuser());
+			form.setStatus(issue.getStatus());
+		}
+
 		model.addAttribute("issue", issue);
 
 		return "issues/changeForm";
 	}
+
+	@PostMapping("/{issueId}/change")
+	public String change(@PathVariable("issueId") long issueId, @Validated IssueChangeForm form,
+			BindingResult bindingResult, Model model) {
+
+		if (bindingResult.hasErrors()) {
+			return showChangeForm(issueId, form, bindingResult, model);
+		}
+
+		issueService.change(issueId, form);
+
+		return "redirect:/issues/" + issueId;
+	}
+
 }

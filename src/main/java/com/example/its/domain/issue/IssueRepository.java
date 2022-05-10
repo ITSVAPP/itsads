@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface IssueRepository {
@@ -23,5 +24,11 @@ public interface IssueRepository {
 
 	@Select("delete from issues where id =  #{issueId}")
 	IssueEntity deleteById(long issueId);
+
+	@Update("update issues set summary = #{summary}, description = #{description}, deadline = #{deadline}, completionday = #{completionday}, createuser = #{createuser}, status = #{status} where id = #{issueId}")
+	void update(@Param("issueId") long issueId, @Param("summary") String summary,
+			@Param("description") String description, @Param("deadline") Date deadline,
+			@Param("completionday") Date completionday, @Param("createuser") String createuser,
+			@Param("status") int status);
 
 }
