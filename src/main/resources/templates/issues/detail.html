@@ -37,7 +37,13 @@
 
 			</tbody>
 		</table>
-
+		<div>
+			<form action="#"
+				th:action="@{/issues/{issueId}/delete(issueId=${issueId})}"
+				th:method="post">
+				<button type="submit" class="btn btn-danger">削除</button>
+			</form>
+		</div>
 	</div>
 </body>
 </html>

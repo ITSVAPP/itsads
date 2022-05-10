@@ -31,4 +31,10 @@ public class IssueService {
 	public IssueEntity findById(long issueId) {
 		return issueRepository.findById(issueId);
 	}
+
+	@Transactional
+	public void delete(long issueId) {
+		issueRepository.deleteById(issueId);
+	}
+
 }

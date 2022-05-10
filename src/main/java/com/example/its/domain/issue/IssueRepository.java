@@ -20,4 +20,8 @@ public interface IssueRepository {
 
 	@Select("select * from issues where id = #{issueId}")
 	IssueEntity findById(long issueId);
+
+	@Select("delete from issues where id =  #{issueId}")
+	IssueEntity deleteById(long issueId);
+
 }
