@@ -8,7 +8,7 @@
 	<h1 class="mt-3">課題一覧</h1>
 	<a href="../index.html" th:href="@{/}">トップページ</a>
 	<a href="./creationForm.html" th:href="@{/issues/creationForm}">作成</a>
-	<div th:if="${param.created}" class="alert alert-info">新規課題を作成しました。</div>
+	<div th:if="${param.created}" class="alert alert-info" th:text="#{info.createdmessage}">(createdmessge)</div>
 	<table class="table">
 		<thead>
 			<tr>
