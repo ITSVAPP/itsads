@@ -96,7 +96,7 @@ public class IssueController {
 
 		issueService.change(issueId, form);
 
-		return "redirect:/issues/" + issueId;
+		return "redirect:/issues/" + issueId + "?changed";
 	}
 
 }
