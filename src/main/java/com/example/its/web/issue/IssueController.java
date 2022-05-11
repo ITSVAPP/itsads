@@ -40,7 +40,7 @@ public class IssueController {
 			return showCreationForm(form);
 		}
 		issueService.create(form);
-		return "redirect:/issues";
+		return "redirect:/issues?created";
 	}
 
 	@GetMapping("/{issueId}")
