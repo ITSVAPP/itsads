@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.its.domain.issue.IssueEntity;
 import com.example.its.domain.issue.IssueService;
+import com.example.its.exception.ApplicationException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -44,7 +45,11 @@ public class IssueController {
 
 	@GetMapping("/{issueId}")
 	public String showDetail(@PathVariable("issueId") long issueId, Model model) {
-		model.addAttribute("issue", issueService.findById(issueId));
+		try {
+			model.addAttribute("issue", issueService.findById(issueId));
+		} catch (ApplicationException e) {
+			model.addAttribute("errmessage", e.getMessage());
+		}
 		return "issues/detail";
 	}
 
@@ -58,18 +63,25 @@ public class IssueController {
 	public String showChangeForm(@PathVariable("issueId") long issueId, @ModelAttribute IssueChangeForm form,
 			BindingResult bindingResult, Model model) {
 
-		IssueEntity issue = issueService.findById(issueId);
+		IssueEntity issue;
 
-		if (!bindingResult.hasErrors()) {
-			form.setSummary(issue.getSummary());
-			form.setDescription(issue.getDescription());
-			form.setDeadline(issue.getDeadline());
-			form.setCompletionday(issue.getCompletionday());
-			form.setCreateuser(issue.getCreateuser());
-			form.setStatus(issue.getStatus());
+		try {
+
+			issue = issueService.findById(issueId);
+			if (!bindingResult.hasErrors()) {
+				form.setSummary(issue.getSummary());
+				form.setDescription(issue.getDescription());
+				form.setDeadline(issue.getDeadline());
+				form.setCompletionday(issue.getCompletionday());
+				form.setCreateuser(issue.getCreateuser());
+				form.setStatus(issue.getStatus());
+			}
+
+			model.addAttribute("issue", issue);
+
+		} catch (ApplicationException e) {
+			model.addAttribute("message", e.getMessage());
 		}
-
-		model.addAttribute("issue", issue);
 
 		return "issues/changeForm";
 	}

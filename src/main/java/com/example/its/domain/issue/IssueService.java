@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.its.exception.ApplicationException;
 import com.example.its.web.issue.IssueChangeForm;
 import com.example.its.web.issue.IssueForm;
 
@@ -27,7 +28,13 @@ public class IssueService {
 				emptyToNull(form.getCreateuser()), form.getStatus());
 	}
 
-	public IssueEntity findById(long issueId) {
+	public IssueEntity findById(long issueId) throws ApplicationException {
+		IssueEntity issue = issueRepository.findById(issueId);
+
+		if (issue == null) {
+			throw new ApplicationException("課題がありません。");
+		}
+
 		return issueRepository.findById(issueId);
 	}
 
