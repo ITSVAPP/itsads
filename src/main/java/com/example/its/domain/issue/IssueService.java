@@ -2,6 +2,7 @@ package com.example.its.domain.issue;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,9 @@ import lombok.RequiredArgsConstructor;
 public class IssueService {
 
 	private final IssueRepository issueRepository;
+
+	@Value("${error.noissuemesage}")
+	private String noIssueMessage;
 
 	public List<IssueEntity> findAll() {
 		return issueRepository.findAll();
@@ -32,7 +36,7 @@ public class IssueService {
 		IssueEntity issue = issueRepository.findById(issueId);
 
 		if (issue == null) {
-			throw new ApplicationException("課題がありません。");
+			throw new ApplicationException(noIssueMessage);
 		}
 
 		return issueRepository.findById(issueId);
