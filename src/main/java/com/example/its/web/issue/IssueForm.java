@@ -2,6 +2,7 @@ package com.example.its.web.issue;
 
 import java.util.Date;
 
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -27,5 +28,21 @@ public class IssueForm {
 	private String createuser;
 
 	private int status;
+
+	/**
+	 * 
+	 * ステータスが着手でかつ作成者がいない場合、業務エラーとする
+	 * 
+	 * @return
+	 */
+	@AssertTrue
+	public boolean isNocreateuser() {
+
+		if (status == 1 && "".equals(createuser)) {
+			return false;
+		}
+
+		return true;
+	}
 
 }

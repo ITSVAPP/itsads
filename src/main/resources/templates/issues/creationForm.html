@@ -29,8 +29,10 @@
     <div class="mt-3">
         <label for="createuserInput" class="form-label">作成者</label>
         <input type="text" id="createuserInput" th:field="*{createuser}" class="form-control"
-                  th:errorclass="is-invalid">
+                  th:errorclass="is-invalid" 
+                  th:classappend="${#fields.hasErrors('nocreateuser')} ? is-invalid"> 
         <p class="invalid-feedback"  th:errors="*{createuser}">(error)</p>
+        <p class="invalid-feedback"  th:errors="*{nocreateuser}">(error)</p>
     </div>
     
     <div class="mt-3">
