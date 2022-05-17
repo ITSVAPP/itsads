@@ -15,9 +15,10 @@ public interface IssueRepository {
 	@Select("select * from issues")
 	List<IssueEntity> findAll();
 
-	@Insert("insert into issues (summary, description, deadline, createuser, status) values (#{summary}, #{description}, #{deadline}, #{createuser}, #{status})")
+	@Insert("insert into issues (summary, description, deadline, completionday, createuser, status) values (#{summary}, #{description}, #{deadline}, #{completionday}, #{createuser}, #{status})")
 	void insert(@Param("summary") String summary, @Param("description") String description,
-			@Param("deadline") Date deadline, @Param("createuser") String createuser, @Param("status") int status);
+			@Param("deadline") Date deadline, @Param("completionday") Date completionday,
+			@Param("createuser") String createuser, @Param("status") int status);
 
 	@Select("select * from issues where id = #{issueId}")
 	IssueEntity findById(long issueId);

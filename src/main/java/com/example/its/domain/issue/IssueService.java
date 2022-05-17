@@ -1,5 +1,6 @@
 package com.example.its.domain.issue;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +29,14 @@ public class IssueService {
 	@Transactional
 	public void create(IssueForm form) {
 
-		issueRepository.insert(form.getSummary(), form.getDescription(), form.getDeadline(),
+		Date completionday = null;
+
+		// ステータスが完了の場合、完了日を設定する
+		if (form.getStatus() == 2) {
+			completionday = new Date();
+		}
+
+		issueRepository.insert(form.getSummary(), form.getDescription(), form.getDeadline(), completionday,
 				emptyToNull(form.getCreateuser()), form.getStatus());
 	}
 
