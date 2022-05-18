@@ -1,5 +1,6 @@
 package com.example.its.web.issue;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.its.domain.issue.IssueEntity;
 import com.example.its.domain.issue.IssueService;
 import com.example.its.exception.ApplicationException;
+import com.example.its.session.SessionData;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,6 +24,11 @@ import lombok.RequiredArgsConstructor;
 public class IssueController {
 
 	private final IssueService issueService;
+
+	private final SessionData sessionData;
+
+	@Value("${error.noissuemesage}")
+	private String noIssueMessage;
 
 	@GetMapping
 	public String showList(Model model) {
@@ -46,7 +53,9 @@ public class IssueController {
 	@GetMapping("/{issueId}")
 	public String showDetail(@PathVariable("issueId") long issueId, Model model) {
 		try {
-			model.addAttribute("issue", issueService.findById(issueId));
+			IssueEntity issue = issueService.findById(issueId);
+			model.addAttribute("issue", issue);
+			sessionData.setIssueEntity(issue);
 		} catch (ApplicationException e) {
 			model.addAttribute("errmessage", e.getMessage());
 		}
@@ -63,24 +72,22 @@ public class IssueController {
 	public String showChangeForm(@PathVariable("issueId") long issueId, @ModelAttribute IssueChangeForm form,
 			BindingResult bindingResult, Model model) {
 
-		IssueEntity issue;
+		IssueEntity issue = sessionData.getIssueEntity();
 
-		try {
+		// セッションに値がない場合
+		if (issue == null) {
+			model.addAttribute("errmessage", noIssueMessage);
+			return "issues/changeForm";
+		}
 
-			issue = issueService.findById(issueId);
-			if (!bindingResult.hasErrors()) {
-				form.setSummary(issue.getSummary());
-				form.setDescription(issue.getDescription());
-				form.setDeadline(issue.getDeadline());
-				form.setCompletionday(issue.getCompletionday());
-				form.setCreateuser(issue.getCreateuser());
-				form.setStatus(issue.getStatus());
-			}
-
-			model.addAttribute("issue", issue);
-
-		} catch (ApplicationException e) {
-			model.addAttribute("message", e.getMessage());
+		model.addAttribute("issue", issue);
+		if (!bindingResult.hasErrors()) {
+			form.setSummary(issue.getSummary());
+			form.setDescription(issue.getDescription());
+			form.setDeadline(issue.getDeadline());
+			form.setCompletionday(issue.getCompletionday());
+			form.setCreateuser(issue.getCreateuser());
+			form.setStatus(issue.getStatus());
 		}
 
 		return "issues/changeForm";

@@ -1,71 +1,59 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{fragments/layout :: layout(~{::title}, ~{::body})}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout(~{::title}, ~{::body})}">
 <head>
 <title>課題作成 | 課題管理アプリケーション</title>
 </head>
 <body>
 	<h1 class="mt-3">課題変更</h1>
+	<div th:if="${errmessage}" class="alert alert-danger" role="alert" th:text="${errmessage}">(errmessage)</div>
 
-	<form action="#"
-		th:action="@{/issues/{issueId}/change(issueId=${issueId})}"
-		th:method="post" th:object="${issueChangeForm}">
+	<div th:if="!${errmessage}">
+		<form action="#" th:action="@{/issues/{issueId}/change(issueId=${issueId})}" th:method="post" th:object="${issueChangeForm}">
 
-		<div class="mt-3">
-			<label for="summaryInput" class="form-label">概要</label>
-			<input type="text" id="summaryInput" th:field="*{summary}"
-				class="form-control" th:errorclass="is-invalid">
-			<p class="invalid-feedback" th:errors="*{summary}">(error)</p>
-		</div>
-		<div class="mt-3">
-			<label for="descriptionInput" class="form-label">説明</label>
-			<textarea id="descriptionInput" row="10" th:field="*{description}"
-				class="form-control" th:errorclass="is-invalid"></textarea>
-			<p class="invalid-feedback" th:errors="*{description}">(error)</p>
-		</div>
+			<div class="mt-3">
+				<label for="summaryInput" class="form-label">概要</label>
+				<input type="text" id="summaryInput" th:field="*{summary}" class="form-control" th:errorclass="is-invalid">
+				<p class="invalid-feedback" th:errors="*{summary}">(error)</p>
+			</div>
+			<div class="mt-3">
+				<label for="descriptionInput" class="form-label">説明</label>
+				<textarea id="descriptionInput" row="10" th:field="*{description}" class="form-control" th:errorclass="is-invalid"></textarea>
+				<p class="invalid-feedback" th:errors="*{description}">(error)</p>
+			</div>
 
-		<div class="mt-3">
-			<label for="createddayInput" class="form-label">作成日</label>
-			<input type="text" id="createddayInput"
-				th:value="${#dates.format(issue.createdday,'yyyy/MM/dd')}"
-				class="form-control" readonly="readonly">
-		</div>
-		<div class="mt-3">
-			<label for="deadlineInput" class="form-label">期限</label>
-			<input type="date" id="deadlineInput" th:field="*{deadline}"
-				class="form-control" th:errorclass="is-invalid">
-			<p class="invalid-feedback" th:errors="*{deadline}">(error)</p>
-		</div>
+			<div class="mt-3">
+				<label for="createddayInput" class="form-label">作成日</label>
+				<input type="text" id="createddayInput" th:value="${#dates.format(issue.createdday,'yyyy/MM/dd')}" class="form-control" readonly="readonly">
+			</div>
+			<div class="mt-3">
+				<label for="deadlineInput" class="form-label">期限</label>
+				<input type="date" id="deadlineInput" th:field="*{deadline}" class="form-control" th:errorclass="is-invalid">
+				<p class="invalid-feedback" th:errors="*{deadline}">(error)</p>
+			</div>
 
-		<div class="mt-3">
-			<label for="completiondayInput" class="form-label">完了日</label>
-			<input type="date" id="completiondayInput"
-				th:field="*{completionday}" class="form-control"
-				th:errorclass="is-invalid">
-			<p class="invalid-feedback" th:errors="*{completionday}">(error)</p>
-		</div>
-		<div class="mt-3">
-			<label for="createuserInput" class="form-label">作成者</label>
-			<input type="text" id="createuserInput" th:field="*{createuser}"
-				class="form-control" th:errorclass="is-invalid">
-			<p class="invalid-feedback" th:errors="*{createuser}">(error)</p>
-		</div>
-		<div class="mt-3">
-			<label for="statusInput" class="form-label">ステータス</label> <select
-				id="statusInput" th:field="*{status}" class="form-control"
-				th:errorclass="is-invalid">
-				<option value="0">未着手</option>
-				<option value="1">着手</option>
-				<option value="2">完了</option>
-			</select>
-			<p class="invalid-feedback" th:errors="*{createuser}">(error)</p>
-		</div>
-		<div class="mt-3">
-			<button type="submit" class="btn btn-primary">変更</button>
-			<a href="/isuues/detail.html"
-				th:href="@{/issues/{issueId}(issueId=${issueId})}"
-				class="btn btn-secondary">キャンセル</a>
-		</div>
-	</form>
+			<div class="mt-3">
+				<label for="completiondayInput" class="form-label">完了日</label>
+				<input type="date" id="completiondayInput" th:field="*{completionday}" class="form-control" th:errorclass="is-invalid">
+				<p class="invalid-feedback" th:errors="*{completionday}">(error)</p>
+			</div>
+			<div class="mt-3">
+				<label for="createuserInput" class="form-label">作成者</label>
+				<input type="text" id="createuserInput" th:field="*{createuser}" class="form-control" th:errorclass="is-invalid">
+				<p class="invalid-feedback" th:errors="*{createuser}">(error)</p>
+			</div>
+			<div class="mt-3">
+				<label for="statusInput" class="form-label">ステータス</label> <select id="statusInput" th:field="*{status}" class="form-control" th:errorclass="is-invalid">
+					<option value="0">未着手</option>
+					<option value="1">着手</option>
+					<option value="2">完了</option>
+				</select>
+				<p class="invalid-feedback" th:errors="*{createuser}">(error)</p>
+			</div>
+			<div class="mt-3">
+				<button type="submit" class="btn btn-primary">変更</button>
+				<a href="/isuues/detail.html" th:href="@{/issues/{issueId}(issueId=${issueId})}" class="btn btn-secondary">キャンセル</a>
+			</div>
+		</form>
+	</div>
 </body>
 </html>
