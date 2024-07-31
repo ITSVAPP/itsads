@@ -98,6 +98,7 @@ public class IssueController {
 			BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
+			// return "issues/changeForm";が一番シンプル
 			return showChangeForm(issueId, form, bindingResult, model);
 		}
 
