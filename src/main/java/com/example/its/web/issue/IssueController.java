@@ -103,7 +103,7 @@ public class IssueController {
 
 		issueService.change(issueId, form);
 
-		return "redirect:/issues/" + issueId + "?changed";
+		return "redirect:/issues/{issueId}?changed";
 	}
 
 }
