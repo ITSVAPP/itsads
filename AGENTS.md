@@ -7,7 +7,7 @@ AIエージェント／コントリビューター向けのガイドです。
 Udemy講座の課題管理システム（ITS）を題材にした **追加課題集** リポジトリ。`src/` は全課題を適用した **完成形リファレンス実装**、`docs/` は学習者向けの課題ドキュメントです。
 
 - アプリ本体: Java 11 / Spring Boot 2.6.7 / Thymeleaf / MyBatis / H2（インメモリ）/ Lombok / Bean Validation
-- 課題ドキュメント: `docs/exercises/` に1課題＝1Markdown（全20課題）＋索引（`docs/exercises/README.md`）
+- 課題ドキュメント: `docs/exercises/` に1課題＝1Markdown ＋ 索引（`docs/exercises/README.md`）
 
 ## ディレクトリ
 
@@ -43,6 +43,4 @@ Windows では `gradlew.bat <task>` を使う。
 - 課題間のナビゲーション、外部ドキュメントへのリンクはOK。
 
 ## 注意
-
-- 原本の `docs/10_課題一覧.xlsx` は削除・改変しない。
 - コミット／プッシュはユーザーの指示があるときだけ行う。

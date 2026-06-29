@@ -20,7 +20,7 @@ itsads/
 ├── src/                  完成形リファレンス実装（Spring Boot アプリ）
 ├── docs/                 追加課題集（Markdown）
 │   ├── README.md         課題集の入口
-│   ├── exercises/        課題20本＋索引＋完成イメージ画像
+│   ├── exercises/        課題＋索引＋完成イメージ画像
 │   └── setup-eclipse.md  Eclipse版 環境構築補足
 ├── build.gradle
 └── settings.gradle
