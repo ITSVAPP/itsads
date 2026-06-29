@@ -14,7 +14,7 @@ Udemy講座の課題管理システム（ITS）を題材にした **追加課題
 ```text
 src/main/java/com/example/its/   アプリ本体（web / domain / session / exception / config）
 src/main/resources/              schema.sql・data.sql・templates・static・*.properties
-docs/                            課題集（README / exercises / setup-eclipse / 原本xlsx）
+docs/                            課題集（README / exercises / setup-eclipse ）
 ```
 
 ## ビルド・実行・テスト
